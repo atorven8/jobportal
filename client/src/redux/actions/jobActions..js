@@ -1,9 +1,10 @@
 import { message } from "antd";
 import axios from "axios";
+const url = 'https://jobportal.adaptable.app/'
 export const getAllJobs = () => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });
   try {
-    const response = await axios.get("/api/jobs/getalljobs");
+    const response = await axios.get(url + "/api/jobs/getalljobs");
     dispatch({ type: "GET_ALL_JOBS", payload: response.data });
     dispatch({ type: "LOADING", payload: false });
   } catch (error) {
@@ -17,7 +18,7 @@ export const postJob = (values) => async (dispatch) => {
 
   dispatch({ type: "LOADING", payload: true });
   try {
-    const response = await axios.post("/api/jobs/postjob", values);
+    const response = await axios.post(url + "/api/jobs/postjob", values);
 
     dispatch({ type: "LOADING", payload: false });
     message.success("Job Posted Successfully");
@@ -34,7 +35,7 @@ export const postJob = (values) => async (dispatch) => {
 export const editJob = (values) => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });
   try {
-    const response = await axios.post("/api/jobs/editjob", values);
+    const response = await axios.post(url + "/api/jobs/editjob", values);
 
     dispatch({ type: "LOADING", payload: false });
     message.success("Job Updated Successfully");
@@ -56,7 +57,7 @@ export const applyJob = (job) => async (dispatch) => {
 
   dispatch({ type: "LOADING", payload: true });
   try {
-    const response = await axios.post("/api/jobs/applyjob", {job , user});
+    const response = await axios.post(url + "/api/jobs/applyjob", {job , user});
 
     dispatch({ type: "LOADING", payload: false });
     message.success("Job applied Successfully");
@@ -75,7 +76,7 @@ export const applyJob = (job) => async (dispatch) => {
 export const searchJobs = (searchKey) => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });
   try {
-    const response = await axios.get("/api/jobs/getalljobs");
+    const response = await axios.get(url + "/api/jobs/getalljobs");
 
     const jobs = response.data
 
@@ -93,7 +94,7 @@ export const searchJobs = (searchKey) => async (dispatch) => {
 export const sortJobs = (values) => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });
   try {
-    const response = await axios.get("/api/jobs/getalljobs");
+    const response = await axios.get(url + "/api/jobs/getalljobs");
 
     const jobs = response.data
 

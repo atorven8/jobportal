@@ -1,10 +1,11 @@
 import axios from "axios";
 import { message } from "antd";
+const url = 'https://jobportal.adaptable.app/'
 export const registerUser = (values) => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });
 
   try {
-    await axios.post("/api/users/register", values);
+    await axios.post(url + "/api/users/register", values);
     message.success("User Registered Successfully");
     setTimeout(() => {
       window.location.href = "/login";
@@ -20,7 +21,7 @@ export const loginUser = (values) => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });
 
   try {
-    const user = await axios.post("/api/users/login", values);
+    const user = await axios.post(url + "/api/users/login", values);
     message.success("Login success");
     localStorage.setItem("user", JSON.stringify(user.data));
     setTimeout(() => {
@@ -41,7 +42,7 @@ export const updateUser = (values) => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });
 
   try {
-    const user = await axios.post("/api/users/update", values);
+    const user = await axios.post(url + "/api/users/update", values);
     message.success("User updated successfully");
     localStorage.setItem("user", JSON.stringify(user.data));
     setTimeout(() => {
@@ -57,7 +58,7 @@ export const updateUser = (values) => async (dispatch) => {
 export const getAllUsers = () => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });
   try {
-    const response = await axios.get("/api/users/getallusers");
+    const response = await axios.get(url + "/api/users/getallusers");
     dispatch({ type: "GET_ALL_USERS", payload: response.data });
     dispatch({ type: "LOADING", payload: false });
   } catch (error) {
